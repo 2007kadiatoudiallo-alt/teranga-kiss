@@ -4,28 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teranga Kiss — Plus qu'un gloss, une sensation</title>
+  <title>Nos produits — Teranga Kiss</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 </head>
 <body>
-
-  <!-- Écran d'ouverture (splash) -->
-  <div id="splash-screen">
-    <h1 class="splash-logo">Teranga Kiss</h1>
-  </div>
-
-  <!-- Message d'accueil (popup) -->
-  <div id="welcome-popup" class="hidden">
-    <div class="popup-content">
-      <h2>Bienvenue sur Teranga Kiss !</h2>
-      <p>Une question sur une teinte ou votre commande ? Contactez-nous directement sur WhatsApp.</p>
-      <div class="popup-actions">
-        <button id="popup-close" class="btn-outline">Fermer</button>
-        <a id="popup-whatsapp" href="https://wa.me/221781907492" class="btn-fill-whatsapp">Contacter sur WhatsApp</a>
-      </div>
-    </div>
-  </div>
 
   <!-- Bandeau promo défilant -->
   <div id="promo-banner">
@@ -43,17 +26,6 @@
       <a href="panier.html" id="cart-icon" aria-label="Panier"><i data-lucide="shopping-bag"></i></a>
     </div>
   </header>
-  <!-- Recherche -->
-<div id="search-overlay" class="hidden">
-  <div class="search-overlay-top">
-    <div class="search-input-wrap">
-      <i data-lucide="search"></i>
-      <input type="text" id="search-input" placeholder="Rechercher une teinte..." autocomplete="off">
-    </div>
-    <button id="search-close" aria-label="Fermer la recherche"><i data-lucide="x"></i></button>
-  </div>
-  <div id="search-suggestions" class="search-suggestions"></div>
-</div>
 
   <!-- Menu plein écran -->
   <nav id="fullscreen-menu" class="hidden">
@@ -62,61 +34,83 @@
       <li><a href="produits.html">Produit</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="panier.html">Panier</a></li>
-       <li><a href="commande.html">Mes commandes</a></li>
+      <li><a href="commande.html">Mes commandes</a></li>
     </ul>
   </nav>
 
   <main>
 
-    <!-- Bannière d'accueil (hero) -->
-    <section id="hero">
-      <div class="hero-overlay">
-        <p class="hero-logo">Teranga Kiss</p>
-        <p class="hero-slogan">Plus qu'un gloss, une sensation</p>
-        <a href="produits.html" class="hero-cta">Découvrir la collection</a>
+    <!-- Bannière collection -->
+    <section id="shop-banner" class="fade-in-section">
+      <p class="shop-banner-label">COLLECTION</p>
+      <h1 class="shop-banner-title">Toute la collection Teranga Kiss</h1>
+    </section>
+
+    <!-- Pilules de catégories -->
+    <section id="shop-filters-pills" class="fade-in-section">
+      <div class="filter-pills">
+        <button class="filter-pill active">Tout</button>
+        <button class="filter-pill">Best-sellers</button>
+        <button class="filter-pill">Discrètes</button>
+        <button class="filter-pill">Brillantes</button>
+        <button class="filter-pill">Hydratantes</button>
+        <button class="filter-pill">Nouveautés</button>
       </div>
     </section>
 
-    <!-- Section avantages (4 icônes) -->
-    <section id="avantages">
-      <div class="avantages-grid">
+    <!-- Filtres Prix / Format -->
+    <section id="shop-filters" class="fade-in-section">
+      <div class="filters-columns">
 
-        <div class="avantage-item">
-          <div class="avantage-icon"><i data-lucide="flower-2"></i></div>
-          <h3 class="avantage-titre">FORMULE DOUCE</h3>
-          <p class="avantage-texte">sans Ingrédients agressifs,adaptee aux levres sensibles</p>
+        <div class="filter-group">
+          <h3 class="filter-group-title">Prix</h3>
+          <label class="filter-radio">
+            <input type="radio" name="prix" checked>
+            <span class="radio-mark"></span>
+            Tous les prix
+          </label>
+          <label class="filter-radio">
+            <input type="radio" name="prix">
+            <span class="radio-mark"></span>
+            Jusqu'à 5 000 FCFA
+          </label>
+          <label class="filter-radio">
+            <input type="radio" name="prix">
+            <span class="radio-mark"></span>
+            5 000 - 7 000 FCFA
+          </label>
+          <label class="filter-radio">
+            <input type="radio" name="prix">
+            <span class="radio-mark"></span>
+            Plus de 7 000 FCFA
+          </label>
         </div>
 
-        <div class="avantage-item">
-          <div class="avantage-icon"><i data-lucide="truck"></i></div>
-          <h3 class="avantage-titre">LIVRAISON RAPIDE</h3>
-          <p class="avantage-texte">Partout à Dakar avec suivi de commande</p>
-        </div>
-
-        <div class="avantage-item">
-          <div class="avantage-icon"><i data-lucide="shield-check"></i></div>
-          <h3 class="avantage-titre">PAIEMENT SÉCURISÉ</h3>
-          <p class="avantage-texte">plusieurs moyens de paiment(mobile money,a la livraison...)</p>
-        </div>
-
-        <div class="avantage-item">
-          <div class="avantage-icon"><i data-lucide="heart"></i></div>
-          <h3 class="avantage-titre">Service client reactif</h3>
-          <p class="avantage-texte">assistance disponible via whatsApp ou le chatbot IA pour toute question avant/apres achat</p>
+        <div class="filter-group">
+          <h3 class="filter-group-title">Format</h3>
+          <label class="filter-checkbox">
+            <input type="checkbox">
+            <span class="checkbox-mark"></span>
+            Mini
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox">
+            <span class="checkbox-mark"></span>
+            Standard
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox">
+            <span class="checkbox-mark"></span>
+            Duo
+          </label>
         </div>
 
       </div>
+
+      <p class="shop-count">8 pièces</p>
     </section>
 
-    <!-- Intro collection -->
-    <section id="intro-collection">
-      <p class="intro-text">Un peu de Teranga dans chaque gloss</p>
-    </section>
-
-    <!-- Aperçu produits -->
-    <section id="produits-apercu">
-      <h2 class="section-title">Nos teintes phares</h2>
-
+    <section id="produits" class="fade-in-section">
       <div class="product-grid">
 
         <article class="product-card"
@@ -126,11 +120,14 @@
           data-desc="Gloss ultra-brillant à reflets dorés, pour un effet miroir immédiat et une hydratation longue durée."
           data-stock="Plus que 8 en stock !">
           <div class="product-photo-wrap">
+            <span class="badge-nouveau">Nouveau</span>
             <div class="product-photo" style="background:#E8B15A"></div>
-            <span class="product-tap-hint"><i data-lucide="eye"></i></span>
           </div>
           <h3 class="product-name">Sunu Shine</h3>
           <p class="product-price">5 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#E8B15A"></span>
+          </div>
           <button class="btn-voir-details">Voir les détails</button>
         </article>
 
@@ -142,10 +139,12 @@
           data-stock="Plus que 6 en stock !">
           <div class="product-photo-wrap">
             <div class="product-photo" style="background:#D98E5A"></div>
-            <span class="product-tap-hint"><i data-lucide="eye"></i></span>
           </div>
           <h3 class="product-name">Dakar Glow</h3>
           <p class="product-price">5 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#D98E5A"></span>
+          </div>
           <button class="btn-voir-details">Voir les détails</button>
         </article>
 
@@ -157,35 +156,106 @@
           data-desc="Un brun cacao profond et velouté, pour une bouche sophistiquée et intense."
           data-stock="">
           <div class="product-photo-wrap">
-            <span class="badge-out-of-stock">Épuisé</span>
+            <span class="badge-nouveau badge-epuise">Épuisé</span>
             <div class="product-photo" style="background:#7A4B33"></div>
-            <span class="product-tap-hint"><i data-lucide="eye"></i></span>
           </div>
           <h3 class="product-name">Cocoa Kiss</h3>
           <p class="product-price">5 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#7A4B33"></span>
+          </div>
           <button class="btn-voir-details">Voir les détails</button>
         </article>
 
         <article class="product-card"
-          data-name="Djiguene"
+          data-name="Jigéen"
           data-price="5 000 FCFA"
           data-colors="#B86B78,#D9A0AC,#9C3B4E"
           data-desc="Une teinte rosée discrète, pensée pour sublimer les lèvres avec délicatesse."
-          data-stock="Plus que 5 en stock !">
+          data-stock="Plus que 7 en stock !">
           <div class="product-photo-wrap">
             <div class="product-photo" style="background:#B86B78"></div>
-            <span class="product-tap-hint"><i data-lucide="eye"></i></span>
           </div>
-          <h3 class="product-name">Djiguene</h3>
+          <h3 class="product-name">Jigéen</h3>
           <p class="product-price">5 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#B86B78"></span>
+          </div>
+          <button class="btn-voir-details">Voir les détails</button>
+        </article>
+
+        <article class="product-card"
+          data-name="Rose Teranga"
+          data-price="5 000 FCFA"
+          data-colors="#D9A0AC,#B86B78,#C9A385"
+          data-desc="Un rose poudré élégant, entre douceur et raffinement, pour toutes les occasions."
+          data-stock="Plus que 9 en stock !">
+          <div class="product-photo-wrap">
+            <div class="product-photo" style="background:#D9A0AC"></div>
+          </div>
+          <h3 class="product-name">Rose Teranga</h3>
+          <p class="product-price">5 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#D9A0AC"></span>
+          </div>
+          <button class="btn-voir-details">Voir les détails</button>
+        </article>
+
+        <article class="product-card"
+          data-name="Teranga Nude"
+          data-price="5 000 FCFA"
+          data-colors="#C9A385,#E8B15A,#D9A0AC"
+          data-desc="Un nude chaleureux et naturel, l'essentiel pour un look lumineux au quotidien."
+          data-stock="Plus que 4 en stock !">
+          <div class="product-photo-wrap">
+            <span class="badge-nouveau">Nouveau</span>
+            <div class="product-photo" style="background:#C9A385"></div>
+          </div>
+          <h3 class="product-name">Teranga Nude</h3>
+          <p class="product-price">5 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#C9A385"></span>
+          </div>
+          <button class="btn-voir-details">Voir les détails</button>
+        </article>
+
+        <article class="product-card"
+          data-name="Bissap Glow"
+          data-price="5 500 FCFA"
+          data-colors="#9C3B4E,#6E4256,#B86B78"
+          data-desc="Un rouge profond inspiré du bissap, intense et gourmand."
+          data-stock="Plus que 3 en stock !">
+          <div class="product-photo-wrap">
+            <div class="product-photo" style="background:#9C3B4E"></div>
+          </div>
+          <h3 class="product-name">Bissap Glow</h3>
+          <p class="product-price">5 500 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#9C3B4E"></span>
+          </div>
+          <button class="btn-voir-details">Voir les détails</button>
+        </article>
+
+        <article class="product-card"
+          data-name="Or Sénégal"
+          data-price="6 000 FCFA"
+          data-colors="#C6A567,#E8D9B8,#E8B15A"
+          data-desc="Une touche dorée scintillante, pour un effet glamour et lumineux."
+          data-stock="Plus que 6 en stock !">
+          <div class="product-photo-wrap">
+            <span class="badge-nouveau">Nouveau</span>
+            <div class="product-photo" style="background:#C6A567"></div>
+          </div>
+          <h3 class="product-name">Or Sénégal</h3>
+          <p class="product-price">6 000 FCFA</p>
+          <div class="product-swatches">
+            <span class="swatch" style="background:#C6A567"></span>
+          </div>
           <button class="btn-voir-details">Voir les détails</button>
         </article>
 
       </div>
-
-      <a href="produits.html" class="btn-voir-tout">Voir tous les produits</a>
     </section>
-
   </main>
 
   <!-- Fenêtre de détail produit (fiche + couleurs + ajout au panier) -->
@@ -254,7 +324,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
+   <!-- Footer -->
   <footer id="footer">
     <p class="footer-about">Teranga Kiss, c'est l'hospitalité sénégalaise dans un gloss : des teintes chaleureuses pensées pour sublimer chaque sourire.</p>
     <div class="footer-social">
@@ -302,7 +372,7 @@
 
   <script src="js/main.js"></script>
   <script src="icone.js">
-   
+    
   </script>
 </body>
 </html>

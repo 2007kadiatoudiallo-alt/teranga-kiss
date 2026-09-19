@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Teranga Kiss</title>
+  <title>Finaliser la commande — Teranga Kiss</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 </head>
@@ -20,7 +19,7 @@
   <!-- En-tête -->
   <header id="site-header">
     <button id="menu-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
-    <div class="logo"><a href="index.html" class="logo-text">Teranga Kiss</a></div>
+    <div class="logo"><a href="accueil.html" class="logo-text">Teranga Kiss</a></div>
     <div class="header-icons">
       <button id="search-icon" aria-label="Recherche"><i data-lucide="search"></i></button>
       <a href="panier.html" id="cart-icon" aria-label="Panier"><i data-lucide="shopping-bag"></i></a>
@@ -39,31 +38,120 @@
   </nav>
 
   <main>
-    <section id="contact-header" class="fade-in-section">
-      <p class="page-banner-label">CONTACT</p>
-      <h1>Contactez-nous</h1>
-      <p>Une question ? Nous sommes là pour vous.</p>
+
+    <section id="checkout-header" class="fade-in-section">
+      <p class="checkout-breadcrumb">
+        <a href="panier.html">Panier</a> <span>→</span> <span class="current">Finaliser la commande</span>
+      </p>
+      <h1>Finaliser votre commande</h1>
     </section>
 
-    <section id="contact-form" class="fade-in-section">
-      <form>
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="nom">
+    <div id="checkout-layout">
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email">
+      <!-- Colonne gauche : formulaire -->
+      <div id="checkout-form-col">
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4"></textarea>
+        <section class="checkout-block fade-in-section">
+          <h2 class="checkout-block-title"><span class="checkout-step-num">1</span> Vos coordonnées</h2>
+          <div class="checkout-fields">
+            <div class="checkout-field">
+              <label for="co-prenom">Prénom</label>
+              <input type="text" id="co-prenom" placeholder="Votre prénom">
+            </div>
+            <div class="checkout-field">
+              <label for="co-nom">Nom</label>
+              <input type="text" id="co-nom" placeholder="Votre nom">
+            </div>
+            <div class="checkout-field checkout-field-full">
+              <label for="co-email">E-mail (pour la confirmation)</label>
+              <input type="email" id="co-email" placeholder="exemple@email.com">
+            </div>
+            <div class="checkout-field checkout-field-full">
+              <label for="co-tel">Téléphone</label>
+              <input type="tel" id="co-tel" placeholder="+221 77 000 00 00">
+            </div>
+          </div>
+        </section>
 
-        <button type="submit" class="btn-fill-whatsapp">Envoyer</button>
-      </form>
-    </section>
+        <section class="checkout-block fade-in-section">
+          <h2 class="checkout-block-title"><span class="checkout-step-num">2</span> Adresse de livraison</h2>
+          <div class="checkout-fields">
+            <div class="checkout-field checkout-field-full">
+              <label for="co-ville">Ville</label>
+              <select id="co-ville">
+                <option value="">Sélectionnez une ville...</option>
+                <option>Dakar</option>
+                <option>Pikine</option>
+                <option>Guédiawaye</option>
+                <option>Rufisque</option>
+                <option>Thiès</option>
+                <option>Autre région</option>
+              </select>
+            </div>
+            <div class="checkout-field checkout-field-full">
+              <label for="co-adresse">Adresse complète</label>
+              <input type="text" id="co-adresse" placeholder="Quartier, rue, repère...">
+            </div>
+          </div>
+        </section>
 
-    <section id="contact-direct" class="fade-in-section">
-      <a href="https://wa.me/221781907492" class="btn-fill-whatsapp">Contacter sur WhatsApp</a>
-      <p class="contact-email">contact@terangakiss.com</p>
-    </section>
+        <section class="checkout-block fade-in-section">
+          <h2 class="checkout-block-title"><span class="checkout-step-num">3</span> Mode de paiement</h2>
+          <p class="checkout-block-sub">Choisissez votre méthode de paiement préférée.</p>
+
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="paiement" value="wave" checked>
+              <span class="payment-radio-mark"></span>
+              <span class="payment-icon payment-icon-wave"><i data-lucide="smartphone"></i></span>
+              <span class="payment-label">Wave</span>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="paiement" value="orange-money">
+              <span class="payment-radio-mark"></span>
+              <span class="payment-icon payment-icon-orange"><i data-lucide="smartphone"></i></span>
+              <span class="payment-label">Orange Money</span>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="paiement" value="livraison">
+              <span class="payment-radio-mark"></span>
+              <span class="payment-icon payment-icon-cash"><i data-lucide="banknote"></i></span>
+              <span class="payment-label">Paiement à la livraison</span>
+            </label>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Colonne droite : récap de commande -->
+      <aside id="checkout-summary">
+        <h2 class="checkout-summary-title">Votre commande</h2>
+
+        <div id="checkout-summary-items"></div>
+
+        <div class="checkout-summary-row">
+          <span>Sous-total</span>
+          <span id="checkout-subtotal">0 FCFA</span>
+        </div>
+        <div class="checkout-summary-row">
+          <span>Livraison</span>
+          <span id="checkout-shipping">Gratuite</span>
+        </div>
+        <div class="checkout-summary-row checkout-summary-total">
+          <span>Total</span>
+          <span id="checkout-total">0 FCFA</span>
+        </div>
+
+        <button id="checkout-confirm" class="btn-fill-whatsapp checkout-confirm-btn">
+          Confirmer la commande <i data-lucide="arrow-right"></i>
+        </button>
+        <p class="checkout-secure-note"><i data-lucide="shield-check"></i> Paiement sécurisé</p>
+      </aside>
+
+    </div>
+
   </main>
 
   <!-- Bulle de chat IA -->
@@ -93,7 +181,7 @@
     </div>
   </div>
 
-   <!-- Footer -->
+  <!-- Footer -->
   <footer id="footer">
     <p class="footer-about">Teranga Kiss, c'est l'hospitalité sénégalaise dans un gloss : des teintes chaleureuses pensées pour sublimer chaque sourire.</p>
     <div class="footer-social">
@@ -116,35 +204,7 @@
     <p class="footer-copyright">© 2026 Teranga Kiss. Tous droits réservés.</p>
   </footer>
 
-  <!-- Bouton retour en haut -->
-  <button id="back-to-top" aria-label="Retour en haut"><i data-lucide="arrow-up"></i></button>
-
-  <!-- Barre de navigation fixe en bas -->
-  <nav id="bottom-nav">
-    <a href="accueil.html" class="bottom-nav-item active" aria-label="Accueil">
-      <i data-lucide="home"></i>
-    </a>
-    <a href="produits.html" class="bottom-nav-item" aria-label="Recherche">
-      <i data-lucide="search"></i>
-    </a>
-    <a href="panier.html" class="bottom-nav-item" aria-label="Panier">
-      <i data-lucide="shopping-cart"></i>
-      <span class="bottom-nav-badge">0</span>
-    </a>
-    <a href="commande.html" class="bottom-nav-item" aria-label="Commandes">
-      <i data-lucide="clipboard-list"></i>
-    </a>
-    <a href="contact.html" class="bottom-nav-item" aria-label="Contact">
-      <i data-lucide="phone"></i>
-    </a>
-  </nav>
-
   <script src="js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-    });
-  </script>
   <script src="icone.js">
    
   </script>
