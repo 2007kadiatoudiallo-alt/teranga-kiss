@@ -743,37 +743,97 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================================
-   Menu burger — ouverture/fermeture du menu plein écran
+   TERANGA KISS — search.js
+   Icône recherche → suggestions de produits → ouverture fiche
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.getElementById('menu-toggle');
-  const fullscreenMenu = document.getElementById('fullscreen-menu');
+  const overlay = document.getElementById('search-overlay');
+  const input = document.getElementById('search-input');
+  const closeBtn = document.getElementById('search-close');
+  const suggestionsEl = document.getElementById('search-suggestions');
 
-  if (!menuToggle || !fullscreenMenu) return;
+  if (!overlay || !input || !suggestionsEl) return;
 
-  function openMenu() {
-    fullscreenMenu.classList.remove('hidden');
-    menuToggle.innerHTML = '<i data-lucide="x"></i>'; // icône devient une croix
-    if (window.lucide) lucide.createIcons();
-    document.body.style.overflow = 'hidden'; // empêche le scroll derrière le menu
+  function getAllProducts() {
+    return Array.from(document.querySelectorAll('.product-card')).map((card) => ({
+      name: card.dataset.name || '',
+      price: card.dataset.price || '',
+      color: (card.dataset.colors || '').split(',')[0] || '#D9A0AC',
+      epuise: card.dataset.epuise === 'true',
+      card: card
+    }));
   }
 
-  function closeMenu() {
-    fullscreenMenu.classList.add('hidden');
-    menuToggle.innerHTML = '<i data-lucide="menu"></i>'; // icône redevient le burger
-    if (window.lucide) lucide.createIcons();
-    document.body.style.overflow = ''; // réactive le scroll
+  function normalize(str) {
+    return (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
   }
 
-  function toggleMenu() {
-    const isOpen = !fullscreenMenu.classList.contains('hidden');
-    isOpen ? closeMenu() : openMenu();
+  function renderSuggestions(query) {
+    const products = getAllProducts();
+    const q = normalize(query.trim());
+
+    const matches = q
+      ? products.filter((p) => normalize(p.name).includes(q))
+      : products;
+
+    suggestionsEl.innerHTML = '';
+
+    if (matches.length === 0) {
+      suggestionsEl.innerHTML = '<p class="search-no-results">Aucun produit trouvé pour « ' + query + ' ».</p>';
+      return;
+    }
+
+    const label = document.createElement('p');
+    label.className = 'search-suggestion-label';
+    label.textContent = q ? 'Résultats' : 'Nos teintes';
+    suggestionsEl.appendChild(label);
+
+    matches.forEach((p) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'search-suggestion-item';
+      btn.innerHTML =
+        '<div class="search-suggestion-photo" style="background:' + p.color + '"></div>' +
+        '<div class="search-suggestion-info">' +
+          '<p class="search-suggestion-name">' + p.name + (p.epuise ? ' (Épuisé)' : '') + '</p>' +
+          '<p class="search-suggestion-price">' + p.price + '</p>' +
+        '</div>';
+      btn.addEventListener('click', () => selectProduct(p));
+      suggestionsEl.appendChild(btn);
+    });
   }
 
-  menuToggle.addEventListener('click', toggleMenu);
+  function selectProduct(p) {
+    closeSearch();
+    const detailsBtn = p.card.querySelector('.btn-voir-details');
+    if (detailsBtn) detailsBtn.click();
+  }
 
-  // Ferme le menu automatiquement quand on clique sur un lien
-  fullscreenMenu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
+  function openSearch() {
+    overlay.classList.remove('hidden');
+    renderSuggestions('');
+    input.value = '';
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function closeSearch() {
+    overlay.classList.add('hidden');
+  }
+
+  input.addEventListener('input', () => renderSuggestions(input.value));
+  if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+
+  document.querySelectorAll('#search-icon, .bottom-nav-item[aria-label="Recherche"]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSearch();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeSearch();
   });
 });
